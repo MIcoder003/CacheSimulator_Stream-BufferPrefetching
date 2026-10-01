@@ -1,0 +1,10 @@
+# binaries
+sim
+test_way
+test_cache
+test_two_levels
+test_mh
+*.o
+
+# large run output
+debug_runs/
