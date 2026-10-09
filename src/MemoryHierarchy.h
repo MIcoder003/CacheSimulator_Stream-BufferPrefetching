@@ -14,7 +14,7 @@ class MemoryHierarchy{
 
         bool access(unsigned long address, char op);
         const AccessStats& getLevelStats(int level) const;
-        void printAllStats() const;
+        void printAllContents() const;
 
     private:
     std::vector<Cache*> levels;

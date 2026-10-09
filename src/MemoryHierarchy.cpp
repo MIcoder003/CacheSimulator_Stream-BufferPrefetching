@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio> 
 #include "MemoryHierarchy.h"
 
 
@@ -32,14 +33,17 @@ bool MemoryHierarchy::access(unsigned long address, char op){
     return levels[0]->access(address, op);
 }
 
-void MemoryHierarchy::printAllStats() const {
-    for (int i = 0; i < static_cast<int>(levels.size()); i++) {
-        const AccessStats& s = levels[i]->getStats();
-        std::cout << "L" << (i + 1)
-                  << ": reads=" << s.reads
-                  << " readMisses=" << s.readMisses
-                  << " writes=" << s.writes
-                  << " writeMisses=" << s.writeMisses
-                  << " writeBacks=" << s.writeBacks << "\n";
+void MemoryHierarchy::printAllContents() const {
+    for (int i = 0; i < (int) levels.size(); i++) {
+        char name[16];
+        snprintf(name, sizeof(name), "L%d", i + 1);
+        levels[i]->printContents(name);
     }
+
+    for (int i = 0; i < (int) levels.size(); i++) {
+    if (levels[i]->hasPrefetchUnit()) {
+        levels[i]->printPrefetchContents();
+    }
+}
+
 }

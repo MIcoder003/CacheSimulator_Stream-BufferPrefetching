@@ -81,6 +81,14 @@ int main (int argc, char *argv[]) {
       configs.push_back(l2);
    }
 
+   if (params.L2_SIZE > 0) {
+      configs[1].prefN = params.PREF_N;
+      configs[1].prefM = params.PREF_M;
+   } else {
+      configs[0].prefN = params.PREF_N;
+      configs[0].prefM = params.PREF_M;
+   }
+
    MemoryHierarchy hierarchy(configs);
 
    // Read requests from the trace file and issue each one to the hierarchy.
@@ -101,6 +109,8 @@ int main (int argc, char *argv[]) {
       perLevel.push_back(hierarchy.getLevelStats(i));
    }
 
+   hierarchy.printAllContents();
+   printf("===== Measurements =====\n");
    SimulationResults results(perLevel);
    results.print();
 

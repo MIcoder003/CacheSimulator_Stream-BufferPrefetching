@@ -1,12 +1,12 @@
 CC = g++
 CFLAGS = -Wall -g -Isrc
 
-SRC = src/Way.cpp src/Cache.cpp src/MemoryHierarchy.cpp src/SimulationResults.cpp
+SRC = src/Way.cpp src/Cache.cpp src/MemoryHierarchy.cpp src/SimulationResults.cpp src/PrefetchUnit.cpp
 
 all: sim
 
-sim: sim.cc $(SRC)
-	$(CC) $(CFLAGS) sim.cc $(SRC) -o sim
+sim: src/sim.cc $(SRC)
+	$(CC) $(CFLAGS) src/sim.cc $(SRC) -o sim
 
 tests: test_way test_cache test_two_levels test_mh
 

@@ -32,50 +32,51 @@ long long SimulationResults::totalMemoryTraffic() const {
     return last.readMisses + last.writeMisses + last.writeBacks + last.prefetches;
 }
 
+
 void SimulationResults::print() const {
     const AccessStats& l1 = perLevel[0];
 
-    std::cout << "a. number of L1 reads:         " << l1.reads << "\n";
-    std::cout << "b. number of L1 read misses:   " << l1.readMisses << "\n";
-    std::cout << "c. number of L1 writes:        " << l1.writes << "\n";
-    std::cout << "d. number of L1 write misses:  " << l1.writeMisses << "\n";
+    std::cout << "a. L1 reads:                   " << l1.reads << "\n";
+    std::cout << "b. L1 read misses:             " << l1.readMisses << "\n";
+    std::cout << "c. L1 writes:                  " << l1.writes << "\n";
+    std::cout << "d. L1 write misses:            " << l1.writeMisses << "\n";
 
-    std::cout << std::fixed << std::setprecision(6);
+    std::cout << std::fixed << std::setprecision(4);
     std::cout << "e. L1 miss rate:               " << l1MissRate() << "\n";
     std::cout.unsetf(std::ios::fixed);
 
-    std::cout << "f. number of L1 writebacks:    " << l1.writeBacks << "\n";
-    std::cout << "g. number of L1 prefetches:    " << l1.prefetches << "\n";
+    std::cout << "f. L1 writebacks:              " << l1.writeBacks << "\n";
+    std::cout << "g. L1 prefetches:              " << l1.prefetches << "\n";
 
     if (hasL2()) {
         const AccessStats& l2 = perLevel[1];
 
         // With no prefetch unit yet, every L2 read is demand traffic from
         // L1, so items j and k are zero and h and i cover all L2 reads.
-        std::cout << "h. number of L2 reads:         " << l2.reads << "\n";
-        std::cout << "i. number of L2 read misses:   " << l2.readMisses << "\n";
-        std::cout << "j. L2 reads from prefetches:   " << 0 << "\n";
-        std::cout << "k. L2 read misses from pf:     " << 0 << "\n";
-        std::cout << "l. number of L2 writes:        " << l2.writes << "\n";
-        std::cout << "m. number of L2 write misses:  " << l2.writeMisses << "\n";
+        std::cout << "h. L2 reads (demand):          " << l2.reads << "\n";
+        std::cout << "i. L2 read misses (demand):    " << l2.readMisses << "\n";
+        std::cout << "j. L2 reads (prefetch):        " << 0 << "\n";
+        std::cout << "k. L2 read misses (prefetch):  " << 0 << "\n";
+        std::cout << "l. L2 writes:                  " << l2.writes << "\n";
+        std::cout << "m. L2 write misses:            " << l2.writeMisses << "\n";
 
-        std::cout << std::fixed << std::setprecision(6);
+        std::cout << std::fixed << std::setprecision(4);
         std::cout << "n. L2 miss rate:               " << l2MissRate() << "\n";
         std::cout.unsetf(std::ios::fixed);
 
-        std::cout << "o. number of L2 writebacks:    " << l2.writeBacks << "\n";
-        std::cout << "p. number of L2 prefetches:    " << l2.prefetches << "\n";
+        std::cout << "o. L2 writebacks:              " << l2.writeBacks << "\n";
+        std::cout << "p. L2 prefetches:              " << l2.prefetches << "\n";
     } else {
-        std::cout << "h. number of L2 reads:         0\n";
-        std::cout << "i. number of L2 read misses:   0\n";
-        std::cout << "j. L2 reads from prefetches:   0\n";
-        std::cout << "k. L2 read misses from pf:     0\n";
-        std::cout << "l. number of L2 writes:        0\n";
-        std::cout << "m. number of L2 write misses:  0\n";
+        std::cout << "h. L2 reads (demands):         0\n";
+        std::cout << "i. L2 read misses (demand):    0\n";
+        std::cout << "j. L2 reads (prefetch):        0\n";
+        std::cout << "k. L2 read misses (prefetch):  0\n";
+        std::cout << "l. L2 writes:                  0\n";
+        std::cout << "m. L2 write misses:            0\n";
         std::cout << "n. L2 miss rate:               0\n";
-        std::cout << "o. number of L2 writebacks:    0\n";
-        std::cout << "p. number of L2 prefetches:    0\n";
+        std::cout << "o. L2 writebacks:              0\n";
+        std::cout << "p. L2 prefetches:              0\n";
     }
 
-    std::cout << "q. total memory traffic:       " << totalMemoryTraffic() << "\n";
+    std::cout << "q. memory traffic:             " << totalMemoryTraffic() << "\n";
 }
