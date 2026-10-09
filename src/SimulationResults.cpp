@@ -74,8 +74,8 @@ void SimulationResults::print() const {
         std::cout << "l. L2 writes:                  0\n";
         std::cout << "m. L2 write misses:            0\n";
         std::cout << std::fixed << std::setprecision(4);
+        std::cout << "n. L2 miss rate:               " << 0.0 << "\n";
         std::cout.unsetf(std::ios::fixed);
-        std::cout << "n. L2 miss rate:               0\n";
         std::cout << "o. L2 writebacks:              0\n";
         std::cout << "p. L2 prefetches:              0\n";
     }
