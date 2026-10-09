@@ -7,3 +7,6 @@ all: sim
 
 sim: src/sim.cc $(SRC)
 	$(CC) $(CFLAGS) src/sim.cc $(SRC) -o sim
+
+clean:
+	rm -f sim test_way test_cache test_two_levels test_mh test_pu
