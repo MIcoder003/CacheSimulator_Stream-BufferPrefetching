@@ -67,12 +67,14 @@ void SimulationResults::print() const {
         std::cout << "o. L2 writebacks:              " << l2.writeBacks << "\n";
         std::cout << "p. L2 prefetches:              " << l2.prefetches << "\n";
     } else {
-        std::cout << "h. L2 reads (demands):         0\n";
+        std::cout << "h. L2 reads (demand):         0\n";
         std::cout << "i. L2 read misses (demand):    0\n";
         std::cout << "j. L2 reads (prefetch):        0\n";
         std::cout << "k. L2 read misses (prefetch):  0\n";
         std::cout << "l. L2 writes:                  0\n";
         std::cout << "m. L2 write misses:            0\n";
+        std::cout << std::fixed << std::setprecision(4);
+        std::cout.unsetf(std::ios::fixed);
         std::cout << "n. L2 miss rate:               0\n";
         std::cout << "o. L2 writebacks:              0\n";
         std::cout << "p. L2 prefetches:              0\n";
