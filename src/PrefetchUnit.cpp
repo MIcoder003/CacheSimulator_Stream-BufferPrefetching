@@ -70,7 +70,7 @@ void PrefetchUnit::updateLru(int bufferIndex) {
     }
 }
 
-// Scenario 1: replace the whole buffer with X+1 .. X+M.
+
 void PrefetchUnit::newStream(int bufferIndex, unsigned long blockAddr,
                              std::vector<unsigned long>& prefetches) {
     StreamBuffer& buf = buffers[bufferIndex];
@@ -82,8 +82,6 @@ void PrefetchUnit::newStream(int bufferIndex, unsigned long blockAddr,
     buf.valid = true;
 }
 
-// Scenarios 2 and 4: drop everything up to and including the hit entry, shift
-// the rest up, refill the freed slots by continuing the stream.
 void PrefetchUnit::advanceStream(int bufferIndex, int entryIndex,
                                  std::vector<unsigned long>& prefetches) {
     StreamBuffer& buf = buffers[bufferIndex];
@@ -119,8 +117,7 @@ void PrefetchUnit::printContents() const {
     std::cout << "\n";
 }
 
-// Scenario 3 (no hit): nothing happens.
-// Scenario 4 (hit): continue that stream, and it becomes most recently used.
+
 bool PrefetchUnit::onCacheHit(unsigned long blockAddr,
                               std::vector<unsigned long>& prefetches) {
     if (!enabled()) return false;
@@ -135,8 +132,6 @@ bool PrefetchUnit::onCacheHit(unsigned long blockAddr,
     return true;
 }
 
-// Scenario 2 (hit): the buffer supplies the block and continues its stream.
-// Scenario 1 (no hit): the LRU buffer starts a new stream at X+1.
 bool PrefetchUnit::onCacheMiss(unsigned long blockAddr,
                                std::vector<unsigned long>& prefetches) {
     if (!enabled()) return false;

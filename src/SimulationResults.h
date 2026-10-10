@@ -4,10 +4,6 @@
 #include <vector>
 #include "AccessStats.h"
  
-// Holds a snapshot of the per-level counters at the end of a run and
-// computes the reported figures from them. The counters themselves know
-// nothing about which level they belong to, so every formula that depends
-// on level position lives here.
 class SimulationResults {
 public:
     explicit SimulationResults(const std::vector<AccessStats>& perLevel);

@@ -8,17 +8,6 @@
 #include "MemoryHierarchy.h"
 #include "SimulationResults.h"
 
-/*  "argc" holds the number of command-line arguments.
-    "argv[]" holds the arguments themselves.
-
-    Example:
-    ./sim 32 8192 4 262144 8 3 10 gcc_trace.txt
-    argc = 9
-    argv[0] = "./sim"
-    argv[1] = "32"
-    argv[2] = "8192"
-    ... and so on
-*/
 int main (int argc, char *argv[]) {
    FILE *fp;			// File pointer.
    char *trace_file;		// This variable holds the trace file name.
@@ -26,13 +15,11 @@ int main (int argc, char *argv[]) {
    char rw;			// This variable holds the request's type (read or write) obtained from the trace.
    uint32_t addr;		// This variable holds the request's address obtained from the trace.
 
-   // Exit with an error if the number of command-line arguments is incorrect.
    if (argc != 9) {
       printf("Error: Expected 8 command-line arguments but was provided %d.\n", (argc - 1));
       exit(EXIT_FAILURE);
    }
 
-   // "atoi()" (included by <stdlib.h>) converts a string (char *) to an integer (int).
    params.BLOCKSIZE = (uint32_t) atoi(argv[1]);
    params.L1_SIZE   = (uint32_t) atoi(argv[2]);
    params.L1_ASSOC  = (uint32_t) atoi(argv[3]);
@@ -62,8 +49,6 @@ int main (int argc, char *argv[]) {
    printf("trace_file: %s\n", trace_file);
    printf("\n");
 
-   // The command line gives total size in bytes; the cache needs a set count.
-   // sets = size / (block size * associativity)
    std::vector<CacheConfig> configs;
 
    CacheConfig l1;
@@ -72,7 +57,6 @@ int main (int argc, char *argv[]) {
    l1.numSets       = params.L1_SIZE / (params.BLOCKSIZE * params.L1_ASSOC);
    configs.push_back(l1);
 
-   // An L2 size of zero means there is no L2 at all.
    if (params.L2_SIZE > 0) {
       CacheConfig l2;
       l2.blockSize     = params.BLOCKSIZE;

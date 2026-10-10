@@ -6,11 +6,11 @@
 struct StreamBuffer {
     bool valid;
     int lruCounter;
-    std::vector<unsigned long> blocks;  // size is M
+    std::vector<unsigned long> blocks;  
 };
 
 struct BufferHit {
-    int bufferIndex;   // -1 when nothing hit
+    int bufferIndex;   
     int entryIndex;
 };
 
@@ -19,9 +19,6 @@ class PrefetchUnit {
     public:
      PrefetchUnit(int N, int M);
 
-     // Both return true if the block hit in a stream buffer.
-     // Any blocks that need prefetching are appended to prefetches;
-     // the caller issues those reads to the next level.
      bool onCacheHit(unsigned long blockAddr, std::vector<unsigned long>& prefetches);
      bool onCacheMiss(unsigned long blockAddr, std::vector<unsigned long>& prefetches);
 

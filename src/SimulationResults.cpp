@@ -18,7 +18,7 @@ double SimulationResults::l1MissRate() const {
     return static_cast<double>(l1.readMisses + l1.writeMisses) / total;
 }
 
-// n. L2 read misses / L2 reads -- reads only, unlike L1
+// n. L2 read misses / L2 reads - reads only, unlike L1
 double SimulationResults::l2MissRate() const {
     if (!hasL2()) return 0.0;
     const AccessStats& l2 = perLevel[1];
@@ -75,7 +75,7 @@ void SimulationResults::print() const {
         std::cout << "m. L2 write misses:            0\n";
         std::cout << std::fixed << std::setprecision(4);
         std::cout << "n. L2 miss rate:               " << 0.0 << "\n";
-        std::cout.unsetf(std::ios::fixed);
+        std::cout.unsetf(std::ios::fixed); 
         std::cout << "o. L2 writebacks:              0\n";
         std::cout << "p. L2 prefetches:              0\n";
     }
